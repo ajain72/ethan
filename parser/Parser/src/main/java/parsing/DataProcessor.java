@@ -3,6 +3,8 @@ package parsing;
 
 import java.util.List;
 import java.util.ArrayList;
+
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 public class DataProcessor {
@@ -26,7 +28,7 @@ public class DataProcessor {
 			String number = parseSSN(line.trim());
 			
 			JSONObject obj = new JSONObject();
-			obj.put("name", name);
+			obj.put("Name", name);
 			obj.put("DOB", date);
 			obj.put("SSN", number);
 			
@@ -39,20 +41,50 @@ public class DataProcessor {
 		while (!Character.isDigit(input.charAt(index))) {
 			index++;
 		}
-		String name = input.substring(0, index);
+		String fullName = input.substring(0, index).trim();
+		String[] splitName = fullName.split(",");
+		if (splitName.length == 1) return fullName;
 		
+		String finalName = splitName[1] + " " + splitName[0];
 		
-		return name.trim();
+		return finalName;
 	}
 	
-	private String parseDOB(String input) { //TODO: add incomplete data checking
-		String date = input.substring(input.length()-17,input.length()-9);
+	private String parseDOB(String input) { 
+		int index = 0;
+		while (!Character.isDigit(input.charAt(index))) {
+			index++;
+		}
+		
+		String date = input.substring(index,input.length()-9);
+		String month, day, year;
+		year = date.substring(date.length()-4); //Assume valid year
+		date = date.substring(0,date.length()-4);
+		//Handle month and day, assuming error only involves no leading zeroes
+		if (date.length() == 4) {
+			month = date.substring(0, 2);
+			day = date.substring(2);
+		} else if (date.length() == 2) {
+			month = "0"+date.charAt(0);
+			day = "0"+date.charAt(1);
+		} else {
+			if (date.charAt(0) != '1') {
+				month = "0"+date.charAt(0);
+				day = date.substring(1);
+			} else {
+				month = date.substring(0,2);
+				day = "0"+date.charAt(2);
+			}
+		}
+		
+		date = month + "-" + day + "-" + year;
+		
 		return date;
 	}
 	
 	private String parseSSN(String input) {
 		String SSN = input.substring(input.length()-9);
-		
+		SSN = SSN.substring(0,3)+"-"+SSN.substring(3,5)+"-"+SSN.substring(5);
 		return SSN;
 	}
 	
