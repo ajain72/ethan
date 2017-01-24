@@ -2,7 +2,8 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Auditor</title>
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="auditor.js"></script>
 </head>
 <body>
@@ -11,8 +12,8 @@
 
   <fieldset>
     <h2>File 1</h2>
-     <input type='file' id='fileinput'>
-     <input type='button' id='btnLoad' value='Load' onclick='loadFile(f1);'>
+     <input type='file' id='fileinput1'>
+     <input type='button' id='btnLoad1' value='Load' onclick='loadFile("fileinput1","table1");'>
   </fieldset>
 </form>
 
@@ -20,13 +21,16 @@
 
   <fieldset>
     <h2>File 2</h2>
-     <input type='file' id='fileinput'>
-     <input type='button' id='btnLoad' value='Load' onclick='loadFile(f2);'>
+     <input type='file' id='fileinput2'>
+     <input type='button' id='btnLoad2' value='Load' onclick='loadFile("fileinput2","table2");'>
   </fieldset>
 </form>
 
 <table>
-<tr><td id="f1"></td><td id="f2"></td></tr>
+<tr>
+<td><table id="table1"><tr><td>Name</td><td>DOB</td><td>SSN</td></tr></table></td>
+<td><table id="table2"><tr><td>Name</td><td>DOB</td><td>SSN</td></tr></table></td>
+</tr>
 </table>
 
 </body>
