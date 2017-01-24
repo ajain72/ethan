@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script type="text/javascript" src="auditor.js"></script>
+</head>
+<body>
+
+<form id="file1" name="file1" enctype="multipart/form-data" method="post">
+
+  <fieldset>
+    <h2>File 1</h2>
+     <input type='file' id='fileinput'>
+     <input type='button' id='btnLoad' value='Load' onclick='loadFile(f1);'>
+  </fieldset>
+</form>
+
+<form id="file2" name="file2" enctype="multipart/form-data" method="post">
+
+  <fieldset>
+    <h2>File 2</h2>
+     <input type='file' id='fileinput'>
+     <input type='button' id='btnLoad' value='Load' onclick='loadFile(f2);'>
+  </fieldset>
+</form>
+
+<table>
+<tr><td id="f1"></td><td id="f2"></td></tr>
+</table>
+
+</body>
+</html>
