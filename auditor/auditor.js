@@ -29,7 +29,7 @@ function loadFile(fileinput, table) {
         		var format = "<tr><td>Name</td><td>DOB</td><td>SSN</td></tr>"
         		document.getElementById(table).innerHTML = format;
         		var data = JSON.parse(e.target.result);
-        		
+        		//Populate table from parsed data
         		var t = "";
             	for (var i = 0; i < data.length; i++) {
             		var tr = "<tr>";
@@ -43,12 +43,25 @@ function loadFile(fileinput, table) {
         	};
         })(file);
         fr.readAsText(file);
-        compareTables();
     }
 
-    function compareTables() {
-    	//compare tables and highlight differences
-    }
+    
 	  
 }
 
+function compareTables() {
+	//compare tables and highlight differences
+	var table1 = document.getElementById('table1');
+	var table2 = document.getElementById('table2');
+	
+	for (var i = 0; i < table1.rows.length && i < table2.rows.length; i++) {
+		for (var j = 0; j < table1.rows[i].cells.length && j < table2.rows[i].cells.length; j++) {
+			var cell1 = table1.rows[i].cells[j];
+			var cell2 = table2.rows[i].cells[j];
+			if (cell1.innerHTML != cell2.innerHTML) {
+				cell1.style.backgroundColor = "yellow";
+				cell2.style.backgroundColor = "yellow";
+			}
+		}
+	}
+}
